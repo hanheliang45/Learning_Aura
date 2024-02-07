@@ -1,7 +1,7 @@
 // Copyright Heliang Han 
 
 
-#include "AuraBaseCharacter.h"
+#include "Character/AuraBaseCharacter.h"
 
 // Sets default values
 AAuraBaseCharacter::AAuraBaseCharacter()
