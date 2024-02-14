@@ -10,6 +10,13 @@ AAuraPlayerController::AAuraPlayerController()
 	this->bReplicates = true;
 }
 
+void AAuraPlayerController::PlayerTick(float DeltaTime)
+{
+	Super::PlayerTick(DeltaTime);
+
+	this->CursorTrace();
+}
+
 void AAuraPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
@@ -57,4 +64,39 @@ void AAuraPlayerController::Move(const FInputActionValue& inputActionValue)
 		controlledPawn->AddMovementInput(forwardDierction, inputAxisVector.Y);
 		controlledPawn->AddMovementInput(rightDirection, inputAxisVector.X);
 	}
+}
+
+void AAuraPlayerController::CursorTrace()
+{
+	FHitResult cursorHit;
+	GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, false, cursorHit);
+	if (!cursorHit.bBlockingHit) return;
+
+	IEnemyInterface* hoveringEnemy = Cast<IEnemyInterface>(cursorHit.GetActor());
+
+	if (lastHoveringEnemy == nullptr)
+	{
+		if (hoveringEnemy == nullptr)
+		{
+		
+		}
+		else
+		{
+			hoveringEnemy->HighlightActor();
+		}
+	}
+	else
+	{
+		if (hoveringEnemy == nullptr)
+		{
+			lastHoveringEnemy->UnHighlightActor();
+		}
+		else if (lastHoveringEnemy != hoveringEnemy)
+		{
+			lastHoveringEnemy->UnHighlightActor();
+			hoveringEnemy->HighlightActor();
+		}
+	}
+
+	lastHoveringEnemy = hoveringEnemy;
 }
