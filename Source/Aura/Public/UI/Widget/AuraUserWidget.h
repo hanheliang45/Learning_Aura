@@ -18,6 +18,7 @@ protected:
 	void WidgetControllerSet();
 	
 public:
+	UFUNCTION(BlueprintCallable)
 	void SetWidgetController(UObject* InWidgetController);
 	
 public:
