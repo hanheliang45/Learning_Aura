@@ -21,8 +21,8 @@ public:
 
 	FOnEffectApplied_AssetsTags OnEffectApplied_AssetsTags;
 	
-protected:
-
-	void EffectApplied(UAbilitySystemComponent* ASC,
-		const FGameplayEffectSpec& EffectSpec, FActiveGameplayEffectHandle ActiveEffectHandle);
+// protected:
+//
+// 	void EffectApplied(UAbilitySystemComponent* ASC,
+// 		const FGameplayEffectSpec& EffectSpec, FActiveGameplayEffectHandle ActiveEffectHandle);
 };
