@@ -4,6 +4,7 @@
 #include "AbilitySystem/AuraAttributeSet.h"
 
 #include "AbilitySystemBlueprintLibrary.h"
+#include "AuraGameplayTags.h"
 #include "GameFramework/Character.h"
 #include "GameplayEffectExtension.h"
 #include "Net/UnrealNetwork.h"
@@ -11,10 +12,12 @@
 
 UAuraAttributeSet::UAuraAttributeSet()
 {
-	// InitHealth(10.f);
-	// InitMaxHealth(100.f);
-	// InitMana(5.f);
-	// InitMaxMana(50.f);
+	const FAuraGameplayTags& AuraGameplayTags = FAuraGameplayTags::Get();
+	
+	Tags2Attributes.Add(AuraGameplayTags.Attributes_Primary_Strength, GetStrengthAttribute);
+	Tags2Attributes.Add(AuraGameplayTags.Attributes_Primary_Intelligence, GetIntelligenceAttribute);
+	Tags2Attributes.Add(AuraGameplayTags.Attributes_Primary_Resilience, GetResilienceAttribute);
+	Tags2Attributes.Add(AuraGameplayTags.Attributes_Primary_Vigor, GetVigorAttribute);
 }
 
 void UAuraAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
